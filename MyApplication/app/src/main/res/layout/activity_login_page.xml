@@ -30,12 +30,4 @@
         android:layout_marginLeft="120dp"
         android:text="Save" />
 
-    <Button
-        android:id="@+id/mainPage"
-        android:layout_width="154dp"
-        android:layout_height="68dp"
-        android:layout_marginLeft="120dp"
-        android:text="Main Page" />
-
-
 </LinearLayout>
