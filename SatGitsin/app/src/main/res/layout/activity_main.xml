@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id ="@+id/toolbarRL"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <TextView
+            android:id = "@+id/toolbarBaslikTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Home Page"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:textSize="30dp"
+            android:layout_centerInParent="true"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_0"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/cercevelerFL"
+        android:layout_below="@+id/toolbarRL"
+        android:layout_above="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_0"
+        android:layout_above="@id/bottomNv"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id ="@+id/bottomNv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu ="@menu/alt_menu"
+        android:layout_alignParentBottom="true"
+        app:labelVisibilityMode="labeled"
+        app:elevation="3dp"
+        />
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id = "@+id/satisFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:src = "@drawable/icon_add"
+        app:Tint="@color/white"
+        />
+
+</RelativeLayout>
