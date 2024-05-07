@@ -51,8 +51,7 @@
         app:menu ="@menu/alt_menu"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
-        app:elevation="3dp"
-        />
+        app:elevation="3dp" />
     
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id = "@+id/satisFab"
@@ -62,7 +61,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
         android:src = "@drawable/icon_add"
-        app:Tint="@color/white"
-        />
+        app:tint="@color/white" />
 
 </RelativeLayout>
