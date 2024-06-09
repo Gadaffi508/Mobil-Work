@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132150592733",
+    "project_id": "yapilacaklar-20640",
+    "storage_bucket": "yapilacaklar-20640.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132150592733:android:b668dcfcdc67ebe90a0734",
+        "android_client_info": {
+          "package_name": "com.example.yaplacaklistesiuygulamas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuQLrMq7Oa2I5E7roK7G37sWIbLeGr404"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
