@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements NotlarAdapter.OnN
     private FirebaseAuth auth;
     private Not not;
 
+    private List<Not> notlar = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,35 +55,39 @@ public class MainActivity extends AppCompatActivity implements NotlarAdapter.OnN
         baslikEditText = findViewById(R.id.not_basligi);
         icerikEditText = findViewById(R.id.not_içeriği);
         ekleButton = findViewById(R.id.not_ekle_btn);
-        recyclerView = findViewById(R.id.notlar_recycler_view);
+        recyclerView = findViewById(R.id.your_recycler_view);
         logoutButton = findViewById(R.id.logout_button);
 
         notlarRef = FirebaseDatabase.getInstance().getReference();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         notlarAdapter = new NotlarAdapter(new ArrayList<>(), this);
+        // Kullanıcı oturum açmışsa görevleri yükle.
+        gorevleriYukle();
         recyclerView.setAdapter(notlarAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ekleButton.setOnClickListener(v -> notEkleGuncellet());
         logoutButton.setOnClickListener(v -> kullanıcıOturumKapat());
 
-        gorevleriYukle(); // Kullanıcı oturum açmışsa görevleri yükle.
     }
 
     void gorevleriYukle() {
         String kullanıcıId = auth.getCurrentUser().getUid();
-        Query query = notlarRef.child("notlar").orderByChild("kullanıcıId").equalTo(kullanıcıId);
+        Query query = notlarRef.orderByChild("kullanıcıId").equalTo(kullanıcıId);
+        Log.d("MainActivity", "Sorgu başlatıldı: " + query.toString());
+
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                List<Not> notlar = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Not not = dataSnapshot.getValue(Not.class);
-                    if (not != null) {
-                        not.setId(dataSnapshot.getKey());
-                        notlar.add(not);
-                    }
+                    Log.d("MainActivity", "Veri bulundu: " + dataSnapshot.toString());
+                    Not _not = dataSnapshot.getValue(Not.class);
+                    _not.setId(dataSnapshot.getKey());
+                    notlar.add(_not);
+                    Log.d("MainActivity", "Not yüklendi: " + _not.getBaslik() + " - " + _not.getİcerik());
+
                 }
                 notlarAdapter.setNotlar(notlar);
+                Log.d("MainActivity", "Toplam not sayısı: " + notlar.size());
                 Toast.makeText(MainActivity.this, "Notlar yüklendi.", Toast.LENGTH_SHORT).show();
             }
 
@@ -92,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements NotlarAdapter.OnN
             }
         });
     }
+
+
 
     void notEkleGuncellet() {
         String baslik = baslikEditText.getText().toString().trim();
@@ -115,24 +123,29 @@ public class MainActivity extends AppCompatActivity implements NotlarAdapter.OnN
                 not = new Not(notId, baslik, icerik, kullanıcıId);
                 notlarRef.child("notlar").child(notId).setValue(not).addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "İşlem başarılı", Toast.LENGTH_SHORT).show();
+                    Log.d("MainActivity", "Not eklendi: " + not.getBaslik() + " - " + not.getİcerik());
                     KontrolleriTemizle();
                     gorevleriYukle(); // Yeni eklenen notu göstermek için görevleri yeniden yükleyin
                 }).addOnFailureListener(e -> {
                     Toast.makeText(this, "İşlem başarısız", Toast.LENGTH_SHORT).show();
+                    Log.e("MainActivity", "Not ekleme başarısız.", e);
                 });
             } else {
                 not.setBaslik(baslik);
                 not.setİcerik(icerik);
                 notlarRef.child("notlar").child(not.getId()).setValue(not).addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Güncelleme başarılı", Toast.LENGTH_SHORT).show();
+                    Log.d("MainActivity", "Not güncellendi: " + not.getBaslik() + " - " + not.getİcerik());
                     KontrolleriTemizle();
                     gorevleriYukle(); // Güncellenen notu göstermek için görevleri yeniden yükleyin
                 }).addOnFailureListener(e -> {
                     Toast.makeText(this, "Güncelleme başarısız", Toast.LENGTH_SHORT).show();
+                    Log.e("MainActivity", "Not güncelleme başarısız.", e);
                 });
             }
         }
     }
+
 
     void KontrolleriTemizle() {
         baslikEditText.setText("");
@@ -150,8 +163,12 @@ public class MainActivity extends AppCompatActivity implements NotlarAdapter.OnN
     public void onSilme(Not not) {
         notlarRef.child("notlar").child(not.getId()).removeValue().addOnSuccessListener(aVoid -> {
             Toast.makeText(this, "Silme Başarılı", Toast.LENGTH_SHORT).show();
+            Log.d("MainActivity", "Not silindi: " + not.getBaslik() + " - " + not.getİcerik());
             gorevleriYukle();
-        }).addOnFailureListener(e -> Toast.makeText(this, "Silme Başarısız", Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Silme Başarısız", Toast.LENGTH_SHORT).show();
+            Log.e("MainActivity", "Not silme başarısız.", e);
+        });
     }
 
     @Override

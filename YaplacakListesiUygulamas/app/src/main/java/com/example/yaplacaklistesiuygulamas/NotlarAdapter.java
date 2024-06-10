@@ -17,27 +17,27 @@ public class NotlarAdapter extends RecyclerView.Adapter<NotlarAdapter.NotlarView
 
     private OnNotClickListener listener;
 
-    public NotlarAdapter(List<Not> notlar, OnNotClickListener listener)
+    public NotlarAdapter(List<Not> _notlar, OnNotClickListener listener)
     {
-        this.notlar = notlar;
+        this.notlar = _notlar;
         this.listener = listener;
     }
 
-    public void setNotlar(List<Not> notlar)
+    public void setNotlar(List<Not> _notlar)
     {
-        this.notlar = notlar;
+        this.notlar = _notlar;
         notifyDataSetChanged();
     }
-    @NonNull
+
     @Override
-    public NotlarAdapter.NotlarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public NotlarAdapter.NotlarViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notlar_satiri,parent,false);
         return new NotlarViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotlarAdapter.NotlarViewHolder holder, int position)
+    public void onBindViewHolder(NotlarAdapter.NotlarViewHolder holder, int position)
     {
         Not not = notlar.get(position);
         holder.baslikTextView.setText(not.getBaslik());
@@ -73,7 +73,7 @@ public class NotlarAdapter extends RecyclerView.Adapter<NotlarAdapter.NotlarView
         private Button silButton;
         private Button guncelleButton;
 
-        public NotlarViewHolder(@NonNull View itemView) {
+        public NotlarViewHolder(View itemView) {
             super(itemView);
 
             baslikTextView = itemView.findViewById(R.id.not_basligi);

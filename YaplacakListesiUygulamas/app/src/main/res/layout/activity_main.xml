@@ -25,11 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Not Ekle"/>
-    
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notlar_recycler_view"
+        android:id="@+id/your_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
 
     <Button
         android:id="@+id/logout_button"
