@@ -1,62 +1,64 @@
 package com.example.yaplacaklistesiuygulamas;
 
-public class Not
-{
-    private String id,
-    baslik,
-    icerik,
-    kullanıcıId;
+// Not sınıfı, bir notun özelliklerini ve bu özelliklerin get/set metodlarını içerir.
+public class Not {
 
-    public Not()
-    {
+    // Özel üye değişkenleri: notun ID'si, başlığı, içeriği ve kullanıcı ID'si.
+    private String id; // Notun benzersiz kimliği
+    private String baslik; // Notun başlığı
+    private String icerik; // Notun içeriği
+    private String kullanıcıId; // Notu oluşturan kullanıcının kimliği
 
+    // Boş yapıcı metod, Firebase gibi araçlar için gereklidir.
+    public Not() {
+        // Parametresiz yapıcı metod
     }
 
-    public Not(String id, String baslik, String icerik, String kullanıcıId)
-    {
-        this.id = id;
-        this.baslik = baslik;
-        this.icerik = icerik;
-        this.kullanıcıId = kullanıcıId;
+    // Parametreli yapıcı metod, yeni bir Not nesnesi oluşturmak için kullanılır.
+    public Not(String id, String baslik, String icerik, String kullanıcıId) {
+        this.id = id; // Gelen ID değerini id değişkenine atar
+        this.baslik = baslik; // Gelen başlık değerini baslik değişkenine atar
+        this.icerik = icerik; // Gelen içerik değerini icerik değişkenine atar
+        this.kullanıcıId = kullanıcıId; // Gelen kullanıcı ID değerini kullanıcıId değişkenine atar
     }
 
-    public String getId()
-    {
+    // getId metodu, notun ID'sini döndürür.
+    public String getId() {
         return id;
     }
 
-    public void setId(String _id)
-    {
-        this.id = _id;
+    // setId metodu, notun ID'sini ayarlamak için kullanılır.
+    public void setId(String _id) {
+        this.id = _id; // Gelen ID değerini id değişkenine atar
     }
 
-    public String getBaslik()
-    {
+    // getBaslik metodu, notun başlığını döndürür.
+    public String getBaslik() {
         return baslik;
     }
 
-    public void setBaslik(String _baslik)
-    {
-        this.baslik = _baslik;
+    // setBaslik metodu, notun başlığını ayarlamak için kullanılır.
+    public void setBaslik(String _baslik) {
+        this.baslik = _baslik; // Gelen başlık değerini baslik değişkenine atar
     }
 
-    public String getİcerik()
-    {
+    // getİcerik metodu, notun içeriğini döndürür.
+    public String getİcerik() {
         return icerik;
     }
 
-    public void setİcerik(String _icerik)
-    {
-        this.icerik = icerik;
+    // setİcerik metodu, notun içeriğini ayarlamak için kullanılır.
+    public void setİcerik(String _icerik) {
+        this.icerik = _icerik; // Gelen içerik değerini icerik değişkenine atar
     }
 
-    public String getKullanıcıId()
-    {
-        return icerik;
+    // getKullanıcıId metodu, notu oluşturan kullanıcının ID'sini döndürür.
+    public String getKullanıcıId() {
+        return kullanıcıId; // Düzeltildi: icerik yerine kullanıcıId döndürülüyor
     }
 
-    public void setKullanıcıId(String _kullanıcıId)
-    {
-        this.kullanıcıId = _kullanıcıId;
+    // setKullanıcıId metodu, notu oluşturan kullanıcının ID'sini ayarlamak için kullanılır.
+    public void setKullanıcıId(String _kullanıcıId) {
+        this.kullanıcıId = _kullanıcıId; // Gelen kullanıcı ID değerini kullanıcıId değişkenine atar
     }
 }
